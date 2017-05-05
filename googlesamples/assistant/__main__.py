@@ -316,15 +316,16 @@ def main(api_endpoint, credentials, verbose,
             # the conversation.
             wait_for_user_trigger = not continue_conversation
         '''
-
-        continue_conversation = assistant.converse()
-        if not continue_conversation:
-            logging.info('Assistant conversation finished.')
-            print("exit")
-        else:
-            logging.info('Assistant conversation continues.')
+        ### AssistantPi
+        while True:
+            continue_conversation = assistant.converse()
+            if not continue_conversation:
+                logging.info('Assistant conversation finished.')
+                print("exit")
+                break
+            else:
+                logging.info('Assistant conversation continues.')
         ###
-
 
 if __name__ == '__main__':
     main()
