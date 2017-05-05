@@ -306,6 +306,7 @@ def main(api_endpoint, credentials, verbose,
         # If no file arguments supplied:
         # keep recording voice requests using the microphone
         # and playing back assistant response using the speaker.
+        '''
         wait_for_user_trigger = True
         while True:
             if wait_for_user_trigger:
@@ -314,6 +315,15 @@ def main(api_endpoint, credentials, verbose,
             # wait for user trigger if there is no follow-up turn in
             # the conversation.
             wait_for_user_trigger = not continue_conversation
+        '''
+        ### AssistantPi
+        continue_conversation = assistant.converse()
+        if not continue_conversation:
+            logging.info('Assistant conversation finished.')
+            print("exit")
+        else:
+            logging.info('Assistant conversation continues.')
+        ###
 
 
 if __name__ == '__main__':
