@@ -88,6 +88,9 @@ class SampleAssistant(object):
 
         self.conversation_stream.start_recording()
         logging.info('Recording audio request.')
+        ### AssistantPi
+        print('ready')
+        ###
 
         def iter_converse_requests():
             for c in self.gen_converse_requests():
@@ -316,7 +319,7 @@ def main(api_endpoint, credentials, verbose,
             # the conversation.
             wait_for_user_trigger = not continue_conversation
         '''
-        ### AssistantPi
+
         continue_conversation = assistant.converse()
         if not continue_conversation:
             logging.info('Assistant conversation finished.')
