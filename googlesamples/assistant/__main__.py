@@ -88,9 +88,6 @@ class SampleAssistant(object):
 
         self.conversation_stream.start_recording()
         logging.info('Recording audio request.')
-        ### AssistantPi
-        print('ready')
-        ###
 
         def iter_converse_requests():
             for c in self.gen_converse_requests():
