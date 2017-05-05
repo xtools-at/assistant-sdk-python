@@ -1,7 +1,7 @@
 Google Assistant Python Sample
 ==============================
 
-**Tweaked version of Google Assistant SDK used by `AssistantPi <https://github.com/xtools-at/AssistantPi>`_
+**Tweaked version of Google Assistant SDK used by `AssistantPi <https://github.com/xtools-at/AssistantPi>`_ **
 
 This repository contains a Python sample for the Google Assistant API.
 
