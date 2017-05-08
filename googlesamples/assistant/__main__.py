@@ -30,6 +30,8 @@ from googlesamples.assistant import (
     common_settings
 )
 
+import subprocess
+
 ASSISTANT_API_ENDPOINT = 'embeddedassistant.googleapis.com'
 END_OF_UTTERANCE = embedded_assistant_pb2.ConverseResponse.END_OF_UTTERANCE
 DIALOG_FOLLOW_ON = embedded_assistant_pb2.ConverseResult.DIALOG_FOLLOW_ON
@@ -318,6 +320,7 @@ def main(api_endpoint, credentials, verbose,
         '''
         ### AssistantPi
         while True:
+            subprocess.Popen("sox -q /opt/AlexaPi/src/resources/okgoogle.mp3 -t alsa default vol -6 dB pad 0 0".split())
             continue_conversation = assistant.converse()
             if not continue_conversation:
                 logging.info('Assistant conversation finished.')
