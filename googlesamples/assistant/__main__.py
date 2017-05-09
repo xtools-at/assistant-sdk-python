@@ -321,7 +321,11 @@ def main(api_endpoint, credentials, verbose,
             # wait for user trigger if there is no follow-up turn in
             # the conversation.
             wait_for_user_trigger = not continue_conversation
+            # If we only want one conversation, break.
+            if once and (not continue_conversation):
+                break
         '''
+
         ### AssistantPi
         while True:
             subprocess.Popen("sox -q /opt/AlexaPi/src/resources/okgoogle.mp3 -t alsa default vol -6 dB pad 0 0".split())
@@ -333,13 +337,6 @@ def main(api_endpoint, credentials, verbose,
             else:
                 logging.info('Assistant conversation continues.')
         ###
-=======
-
-            # If we only want one conversation, break.
-            if once and (not continue_conversation):
-                break
-
->>>>>>> upstream-master
 
 if __name__ == '__main__':
     main()
