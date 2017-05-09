@@ -310,13 +310,10 @@ def main(api_endpoint, credentials, verbose,
         # If no file arguments supplied:
         # keep recording voice requests using the microphone
         # and playing back assistant response using the speaker.
-<<<<<<< HEAD
         '''
-        wait_for_user_trigger = True
-=======
         # When the once flag is set, don't wait for a trigger. Otherwise, wait.
         wait_for_user_trigger = not once
->>>>>>> upstream-master
+
         while True:
             if wait_for_user_trigger:
                 click.pause(info='Press Enter to send a new request...')
@@ -324,7 +321,6 @@ def main(api_endpoint, credentials, verbose,
             # wait for user trigger if there is no follow-up turn in
             # the conversation.
             wait_for_user_trigger = not continue_conversation
-<<<<<<< HEAD
         '''
         ### AssistantPi
         while True:
