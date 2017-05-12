@@ -31,6 +31,7 @@ from googlesamples.assistant import (
 )
 
 import subprocess
+import sys
 
 ASSISTANT_API_ENDPOINT = 'embeddedassistant.googleapis.com'
 END_OF_UTTERANCE = embedded_assistant_pb2.ConverseResponse.END_OF_UTTERANCE
@@ -312,11 +313,16 @@ def main(api_endpoint, credentials, verbose,
         # and playing back assistant response using the speaker.
         # When the once flag is set, don't wait for a trigger. Otherwise, wait.
         wait_for_user_trigger = not once
+        continue_conversation = False
         while True:
             if wait_for_user_trigger:
                 click.pause(info='Press Enter to send a new request...')
+            
             ### Play sound
-            subprocess.Popen("sox -q /opt/AlexaPi/src/resources/okgoogle.mp3 -t alsa vol -6 dB pad 0 0".split())
+            if not continue_conversation:
+                subprocess.Popen("sox -q /opt/AlexaPi/src/resources/okgoogle.mp3 -t alsa vol -6 dB pad 0 0".split())
+            ###
+            
             continue_conversation = assistant.converse()
             # wait for user trigger if there is no follow-up turn in
             # the conversation.
@@ -324,8 +330,6 @@ def main(api_endpoint, credentials, verbose,
 
             # If we only want one conversation, break.
             if once and (not continue_conversation):
-                ###
-                print('exit')
                 break
 
 
