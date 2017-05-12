@@ -313,6 +313,8 @@ def main(api_endpoint, credentials, verbose,
         while True:
             if wait_for_user_trigger:
                 click.pause(info='Press Enter to send a new request...')
+            ### Play sound
+            subprocess.Popen("sox -q /opt/AlexaPi/src/resources/okgoogle.mp3 -t alsa vol -6 dB pad 0 0".split())
             continue_conversation = assistant.converse()
             # wait for user trigger if there is no follow-up turn in
             # the conversation.
@@ -320,6 +322,8 @@ def main(api_endpoint, credentials, verbose,
 
             # If we only want one conversation, break.
             if once and (not continue_conversation):
+                ###
+                print('exit')
                 break
 
 
