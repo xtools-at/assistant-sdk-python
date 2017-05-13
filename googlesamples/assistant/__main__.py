@@ -248,7 +248,8 @@ def main(api_endpoint, credentials, verbose,
         )
     except Exception as e:
         logging.error('Error loading credentials: %s', e)
-        logging.error('Run auth_helpers to initialize new OAuth2 credentials.')
+        #logging.error('Run auth_helpers to initialize new OAuth2 credentials.')
+        logging.error('Run  sudo bash /opt/AlexaPi/src/scripts/auth_assistant.sh  to initialize new OAuth2 credentials.')
         return
 
     # Create an authorized gRPC channel.
