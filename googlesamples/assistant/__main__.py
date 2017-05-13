@@ -30,8 +30,7 @@ from googlesamples.assistant import (
     common_settings
 )
 
-import subprocess
-import sys
+import time
 
 ASSISTANT_API_ENDPOINT = 'embeddedassistant.googleapis.com'
 END_OF_UTTERANCE = embedded_assistant_pb2.ConverseResponse.END_OF_UTTERANCE
@@ -313,24 +312,27 @@ def main(api_endpoint, credentials, verbose,
         # and playing back assistant response using the speaker.
         # When the once flag is set, don't wait for a trigger. Otherwise, wait.
         wait_for_user_trigger = not once
-        continue_conversation = False
         while True:
             if wait_for_user_trigger:
-                click.pause(info='Press Enter to send a new request...')
-            
-            ### Play sound
-            if not continue_conversation:
-                subprocess.Popen("sox -q /opt/AlexaPi/src/resources/okgoogle.mp3 -t alsa vol -6 dB pad 0 0".split())
-            ###
-            
-            continue_conversation = assistant.converse()
-            # wait for user trigger if there is no follow-up turn in
-            # the conversation.
-            wait_for_user_trigger = not continue_conversation
+                #click.pause(info='Press Enter to send a new request...')
+                if 'assistant_record' in input():
+                    wait_for_user_trigger = False
+                else:
+                    time.sleep(0.2)
+            else:
+                continue_conversation = assistant.converse()
+                # wait for user trigger if there is no follow-up turn in
+                # the conversation.
+                wait_for_user_trigger = not continue_conversation
 
-            # If we only want one conversation, break.
-            if once and (not continue_conversation):
-                break
+                ###
+                if not continue_conversation:
+                    logging.info('Assistant conversation finished')
+                ###
+
+                # If we only want one conversation, break.
+                if once and (not continue_conversation):
+                    break
 
 
 if __name__ == '__main__':
